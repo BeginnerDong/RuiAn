@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>项目业绩</title>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/performance.css">
+	</head>
+
+<body>
+	<div id="app">
+		<include src="header.html"></include>
+		<include src="banner.html"></include>
+		
+		<div class="w1100 flexRowBetween xiangMuList pdb30">
+			<div class="leftNav">
+				<div class="titBox pdtb30 center">
+					<img class="icon" src="images/results-icon.png" >
+					<h1 class="tit fs16 pdt20">项目业绩</h1>
+				</div>
+				<div class="orderNav fs14">
+					<span class="tt" :class="curr==index?'on':''" @click="changeCurr(index)" v-for="(item,index) in leftNavData" :key="index">{{item}}</span>
+				</div>
+			</div>
+			<div class="R-Cont">
+				<div class="ind-performance">
+					<div class="inforCont flexCenter">
+						<div class="item" v-for="(item,index) in performanceData" :key="index">
+							<div class="flexEnd img"><img src="images/home-img2.jpg" alt=""></div>
+							<div class="FXCont">
+								<a href="detail.html">
+									<div class="inff">
+										<div class="T-title pd20">
+											<h1 class="tit avoidOverflow">标题标题标题标题标题标题标题标题标题标题标题标题</h1>
+											<p class="tex color6 avoidOverflow2">内容呢热熔内容呢热熔是就等科三浪费哈付款交话费科技大厦福建省大黄蜂复合大师融捷股份分工表就是大概和发动机</p>
+										</div>
+										<div class="downCt flexRowBetween pdlr4">
+											<p class="color6 fs12">查看详情</p>
+											<img class="arrow" src="images/home-icon10.png" >
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="all-pages">
+			<span class="no-prev">上一页</span>
+			<span class="current">1</span>
+			<a href="#">2</a><a href="#">3</a>&nbsp;...&nbsp;<a href="#">100</a><a href="#" class="next">下一页</a>
+		</div>
+		
+		<div class="pdb80"></div>
+			
+		<include src="footer.html"></include>
+	</div>
+</body>
+
+	
+	<script type="text/javascript">
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+					is_show:false,
+					wx_show:2,
+					mainData: [],
+					labelData: [],
+					serviceData:[{},{},{},{}],
+					curr:0,
+					leftNavData:['住宅类','商场类','写字楼','场馆类','学校类','酒店类','厂房类','科研类','医院类'],
+					performanceData:[{},{},{},{},{},{}]
+		        }
+		    },
+		    methods: {
+				changeCurr(index){
+					const self = this;
+					self.curr = index
+				},
+				getMainData: function(id){
+				    var self = this;
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				}
+				
+		    }
+		});
+	</script>
+	<style type="text/css">
+	.leftNav{width: 200px;border: 1px solid #eee;box-sizing: border-box;}
+	.titBox .icon{width: 40px;height: 40px;display: block;margin: 0 auto;}
+	
+	.orderNav .tt{ width: 100%;height: 50px; line-height:50px;box-sizing: border-box;padding: 0 20px 0 50px;border-top: 1px solid #eee;display: block;}
+	.orderNav .tt.on{ background: #FDBA13; position: relative; color: #222;}
+	.orderNav .tt.on::after{content: ""; width: 17px; height: 17px;background: url(images/results-icon1.png) no-repeat 0 0/100% 100%; position: absolute; top: 50%;left:20px;transform: translateY(-50%);}
+	
+	.xiangMuList{padding-top: 70px; align-items: flex-start;}
+	.R-Cont{width: 80%;}
+	.ind-performance .item .img img{width: 320px;height: 356px;}
+	
+	@media only screen and (max-width: 1000px){
+		
+		.leftNav{width: 150px;}
+		.leftNav .titBox{padding: 20px 0;}
+		.titBox .icon{width: 30px;height: 30px;}
+		.titBox .tit{font-size: 15px;}
+		
+		.xiangMuList{padding-top: 40px;}
+		.R-Cont{width: 78%;}
+		.ind-performance .item .img img{width: 220px;height: 244px;}
+		
+		.ind-performance .item .FXCont{height: 160px;}
+		.ind-performance .FXCont .T-title{padding: 15px 12% 10px 10px;}
+		.ind-performance .FXCont .tit {font-size: 14px;line-height: 20px;}
+		.ind-performance .FXCont .tex{margin-top: 5px;font-size: 13px;}
+		.ind-performance .downCt{height: 36px;}
+		
+	}
+	
+	@media only screen and (max-width: 500px){
+		
+		.xiangMuList{display: block;padding-top: 10px;}
+		.leftNav{width: 100%;border: none;}
+		.R-Cont{width: 100%;padding-top: 20px;}
+		
+		.titBox .tit{padding-top: 10px;}
+		.orderNav{display: flex;flex-wrap: wrap;align-items: flex-start;}
+		.orderNav .tt{width: 22%;line-height: 36px;height: 36px;margin:0 4% 15px 0;background: #F5F5F5;border-radius: 3px; padding: 0;font-size: 13px;text-align: center;}
+		.orderNav .tt:nth-of-type(4n){margin-right: 0;}
+		.orderNav .tt.on::after{width: 0;height: 0;}
+		
+		
+		
+		.ind-performance .item .img img{width: 153px;height: 170px;}
+		
+		.ind-performance .item{margin: 0px 2% 30px 2%;}
+		.ind-performance .item:nth-of-type(2n){ margin: 30px 2% 0 2%;}
+		.ind-performance .item .FXCont{width: 78%;padding: 5px;height: 78px;bottom: 15px;}
+		
+		.ind-performance .FXCont .inff{border: 1px solid #666;}
+		.ind-performance .FXCont .T-title{padding: 10px 5px;}
+		.ind-performance .FXCont .tit{-webkit-line-clamp: 1;font-weight: normal; font-size: 13px;}
+		.ind-performance .FXCont .tex{display: none;}
+		.ind-performance .downCt{border-top:1px solid #666;padding: 0 5px;height: 30px;}
+		
+	}
+	</style>
+</html>

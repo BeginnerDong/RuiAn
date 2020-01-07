@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>瑞安消防</title>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/index.css">
+		<link type="text/css" rel="stylesheet" href="css/performance.css">
+		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
+		<link type="text/css" rel="stylesheet" href="css/zizhi.css">
+	</head>
+
+<body>
+	<div id="app">
+		<include src="header.html"></include>
+		<include src="banner.html"></include>
+		
+		<!-- 类别数据 -->
+		<div class="ind-box1 w1200 radius10 pubBj center flexRowBetween">
+			<div class="item" v-for="(item,index) in dataShow" :key="index">
+				<img class="icon" :src="item.iconUrl" alt="">
+				<p class="tit">{{item.title}}</p>
+				<p class="num fs16">{{item.number}}</p>
+			</div>
+		</div>
+		
+		<!-- 企业动态 -->
+		<div class="ind-dynamic pdb80">
+			<div class="pubtit flexColumn">
+				<h1 class="title">Enterprise dynamics</h1>
+				<p class="text">企业动态</p>
+			</div>
+			<div class="w1100 pdlr4">
+				<div class="item flexRowBetween">
+					<div class="texbox">
+						<div class="tit avoidOverflow">标题标题标题标题标题标题标题标题标题标题</div>
+						<p class="text2 avoidOverflow3">企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容</p>
+						<div class="flex">
+							<a class="btn" href="detail.html">查看详情</a>
+						</div>
+					</div>
+					<div class="imgBox">
+						<img src="images/home-img.png" >
+					</div>
+				</div>
+				<div class="item flexRowBetween">
+					<div class="imgBox">
+						<img src="images/home-img0.png" >
+					</div>
+					<div class="texbox">
+						<div class="tit avoidOverflow">标题标题标题标题标题标题标题标题标题标题</div>
+						<p class="text2 avoidOverflow3">企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容企业动态内容</p>
+						<div class="Bbtn flex">
+							<a class="btn" href="detail.html">查看详情</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 我们优势 -->
+		<div class="ind-advantage white">
+			<div class="pubtit flexColumn">
+				<h1 class="title">recruitment</h1>
+				<p class="text">我们优势</p>
+			</div>
+			<div class="w1100 flexRowAround center pdb80">
+				<div class="item" v-for="(item,index) in advantageData" :key="index">
+					<img class="icon" :src="item.iconUrl" alt="">
+					<h1 class="tit">{{item.title}}</h1>
+					<p class="tex2 fs14">{{item.text}}</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 项目业绩 -->
+		<div class="ind-performance f5bj">
+			<div class="pubtit flexColumn">
+				<h1 class="title">Project performance</h1>
+				<p class="text">项目业绩</p>
+			</div>
+			<div class="inforCont w1100 flexCenter pdb80">
+				<div class="item" v-for="(item,index) in performanceData" :key="index">
+					<div class="flexEnd img"><img src="images/home-img2.jpg" alt=""></div>
+					<div class="FXCont">
+						<a href="detail.html">
+							<div class="inff">
+								<div class="T-title pd20">
+									<h1 class="tit avoidOverflow2">标题标题标题标题标题标题标题标题标题标题标题标题</h1>
+									<p class="tex color6 avoidOverflow2">内容呢热熔内容呢热熔是就等科三浪费哈付款交话费科技大厦福建省大黄蜂复合大师融捷股份分工表就是大概和发动机</p>
+								</div>
+								<div class="downCt flexRowBetween pdlr4">
+									<p class="color6 fs12">查看详情</p>
+									<img class="arrow" src="images/home-icon10.png" >
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 资质证书 -->
+		<div class="ind-zizhiBox white pdb80">
+			<div class="pubtit flexColumn">
+				<h1 class="title">Qualification certificate</h1>
+				<p class="text">资质证书</p>
+			</div>
+			<div class="w1100 zizhiSwipe pr ">
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				        <div class="swiper-slide" v-for="(item,index) in certificateData" :key="index">
+				        	<img src="images/about-img2.jpg">
+				        </div>
+				    </div>
+				</div>
+				<!-- 左右按钮 -->
+				<div class="swiperBtn swiper-button-next">
+					<img src="images/home-icon13.png" />
+				</div>
+				<div class="swiperBtn swiper-button-prev">
+					<img src="images/home-icon12.png" />
+				</div>
+			</div>
+		</div>
+		
+		<!-- 人才招聘 -->
+		<div class="f5bj">
+			<div class="pubtit flexColumn">
+				<h1 class="title">recruitment</h1>
+				<p class="text">人才招聘</p>
+			</div>
+			<div class="w1100 ind-zhaoPin flexRowBetween pr">
+				<div class="item left ">
+					<a href="#">
+						<div class="infor">
+							<h1 class="tit fs15">消防员</h1>
+							<p class="tex">西安-未央区 3-5年 本科</p>
+							<p class="tex">西安长安消防支队</p>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="infor">
+							<h1 class="tit fs15">消防员</h1>
+							<p class="tex">西安-未央区 3-5年 本科</p>
+							<p class="tex">西安长安消防支队</p>
+						</div>
+					</a>
+				</div>
+				<div class="fxMiddle"><img src="images/home-icon9.png" ></div>
+			</div>
+			<div class="flexCenter">
+				<a class="seeMoreBtn flexCenter" href="#">查看更多<img class="arrow" src="images/home-icon10.png" ></a>
+			</div>
+			<div class="pdb80"></div>
+		</div>
+			
+		<!-- 新闻动态 -->
+		<div class="pubtit flexColumn">
+			<h1 class="title">news</h1>
+			<p class="text">新闻动态</p>
+		</div>
+		<div class="ind-newBox w1100 pdb80">
+			<ul class="flexRowBetween">
+				<li class="item" v-for="(item,index) in newsData" :key="index">
+					<a href="detail.html">
+						<div class="pic oh"><img src="images/home-img4.jpg" /></div>
+						<div class="infor">
+							<p class="tit avoidOverflow">瑞安消防标题瑞安消防标题瑞安消防标题</p>
+							<p class="tex2 avoidOverflow2 color6 fs14">新闻资讯文本内容新闻资讯文本内容新闻资讯文本内容新闻资讯文本内容新闻资讯文本内容新闻资讯文本内容新闻资讯文本内容新闻资讯文本内容</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<div class="flexCenter">
+				<a class="seeMoreBtn flexCenter" href="newsList.html">查看更多<img class="arrow" src="images/home-icon10.png" ></a>
+			</div>
+		</div>
+			
+		<include src="footer.html"></include>
+		
+	</div>
+</body>
+
+	<script type="text/javascript">
+		// 资质证书轮播
+		$(function(){
+		   var swiper = new Swiper('.swiper-container', {
+		       pagination: '.swiper-pagination',
+		       nextButton: '.swiper-button-next',
+		       prevButton: '.swiper-button-prev',
+		       slidesPerView: 3,
+		       centeredSlides: true,
+		       paginationClickable: true,
+		       spaceBetween: 30,
+			   initialSlide: 1  //第一张图显示位置
+		   });
+		}); 
+	</script>
+	<script type="text/javascript">
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+					is_show:false,
+					wx_show:2,
+					mainData: [],
+					labelData: [],
+					dataShow:[
+						{iconUrl:'images/home-icon2.png',title:'厂房',number:'1006+'},
+						{iconUrl:'images/home-icon3.png',title:'体育馆',number:'1000+'},
+						{iconUrl:'images/home-icon4.png',title:'住宅',number:'1000+'},
+						{iconUrl:'images/home-icon5.png',title:'商业',number:'1000+'}
+					],
+					advantageData:[
+						{iconUrl:'images/home-icon6.png',title:'黄金品质',text:'进口硬件、国际品质、技术行进功能齐全。15年经验专注安防'},
+						{iconUrl:'images/home-icon7.png',title:'卓伟定制',text:'专业团队。量身定制。严格ISO-9001标准执行，整体打包方案、质优价廉'},
+						{iconUrl:'images/home-icon8.png',title:'光环服务',text:'售前免费出解决方案，售中免费耐心培训指导，售后终身维护，1年保质'}
+					],
+					certificateData:[{},{},{},{},{}],
+					performanceData:[{},{},{},{}],
+					newsData:[{},{},{}]
+		        }
+		    },
+		    methods: {
+				getMainData: function(id){
+				    var self = this;
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				}
+				
+		    }
+		});
+	</script>
+	<style>
+	.banBtnNav{bottom: 100px;}
+	
+	@media only screen and (max-width: 800px){
+		.banBtnNav{bottom: 24%;}
+	}
+	
+	</style>
+</html>

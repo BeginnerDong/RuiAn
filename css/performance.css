@@ -1,0 +1,44 @@
+
+
+
+/* 项目业绩 */
+.ind-performance .inforCont{flex-wrap: wrap;}
+.ind-performance .item{width: 46%;margin: 0 2% 40px 2%;position: relative;box-sizing: border-box;}
+.ind-performance .item .img img{width:400px; height:444px;}
+.ind-performance .item .FXCont{width: 72%;height: 260px;padding: 10px;background: #fff;position: absolute; bottom: 25px;left: 0;box-sizing: border-box;}
+.ind-performance .FXCont .inff{width: 100%;height: 100%;border: 2px solid #222; box-sizing: border-box;position: relative;}
+.ind-performance .FXCont .T-title{padding: 30px 12% 20px 20px;box-sizing: border-box;}
+.ind-performance .FXCont .tit{font-size: 16px;line-height: 24px;}
+.ind-performance .FXCont .tex{margin-top: 20px;}
+.ind-performance .downCt{height: 50px;border-top: 2px solid #222;position: absolute;bottom: 0px;left: 0;right: 0;}
+.ind-performance .arrow{width: 10px; height: 10px;display: block;}
+.ind-performance .item:nth-of-type(2n){margin: 40px 2% 0 2%;}
+.ind-performance .item:nth-of-type(2n) .FXCont{left: auto;right: 0;} 
+.ind-performance .item:nth-of-type(2n) .img{display: flex;justify-content: flex-start;}
+
+
+@media only screen and (max-width: 1000px){
+	.ind-performance .item .img img{width: 270px;height: 300px;}
+	.ind-performance .item .FXCont{height: 200px;}
+	.ind-performance .FXCont .T-title{padding: 15px 12% 10px 10px;}
+	.ind-performance .FXCont .tit {font-size: 14px;line-height: 20px;}
+	.ind-performance .FXCont .tex{margin-top: 10px;font-size: 13px;}
+	.ind-performance .downCt{height: 40px;}
+	
+}
+
+@media only screen and (max-width: 500px){
+	.ind-performance .item .img img{width: 153px;height: 170px;}
+	
+	.ind-performance .item{margin: 0px 2% 30px 2%;}
+	.ind-performance .item:nth-of-type(2n){ margin: 30px 2% 0 2%;}
+	.ind-performance .item .FXCont{width: 78%;padding: 5px;height: 78px;bottom: 15px;}
+	
+	.ind-performance .FXCont .inff{border: 1px solid #666;}
+	.ind-performance .FXCont .T-title{padding: 10px 5px;}
+	.ind-performance .FXCont .tit{-webkit-line-clamp: 1;font-weight: normal; font-size: 13px;}
+	.ind-performance .FXCont .tex{display: none;}
+	.ind-performance .downCt{border-top:1px solid #666;padding: 0 5px;height: 30px;}
+	
+}
+
