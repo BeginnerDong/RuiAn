@@ -1,0 +1,21 @@
+
+
+/* 资质证书 */
+.ind-zizhiBox{background: url(../images/zizhiBj.jpg) no-repeat 0 0/100% 100%;}
+.zizhiSwipe .swiper-container {margin: 0 50px;}
+.zizhiSwipe .swiper-slide{width:500px; text-align: center; font-size: 18px; background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;transition: 300ms; }
+.zizhiSwipe .swiper-slide:not(.swiper-slide-active){transform: scale(0.8);}
+.zizhiSwipe .swiper-slide img{ width: 100%; height: 100%;}
+
+.zizhiSwipe .swiperBtn{opacity: 1; background-image: initial;}
+.zizhiSwipe .swiperBtn img{width: 100%;height: 100%; display: block;}
+
+@media only screen and (max-width: 500px){
+	.zizhiSwipe .swiper-container{margin: 0 30px;}
+	.swiper-button-next, .swiper-button-prev{width: 20px;height: 37px;}
+	.zizhiSwipe .swiper-slide{margin-right: 0px!important;width: 100px!important;}
+	
+}
+
+
+

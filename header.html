@@ -1,0 +1,141 @@
+<div id="head_app">
+	
+	<div class="head">
+		<div class="logoCont w1200 flexRowBetween">
+			<div class="flex"><img class="T-Logo" src="images/home-icon.png"></div>
+			<div class="Rphone flex white">
+				<img style="width: 30px;height: 21px;display: block;" src="images/home-icon1.png" >
+				<span class="fs14 mgl10">400-568-823</span>
+			</div>
+			<div class="mobile-Btn flexCenter" @click="shownav">
+				<span class="flexColumn">
+					<em></em>
+					<em></em>
+					<em></em>
+				</span>
+			</div>
+		</div>
+		
+		<div class="whiteBj orderNavTwo fs16" v-show="is_showNav">
+			<div class="flexRowBetween w1200">
+				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
+				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于瑞安</a></div>
+				<div class="tt" :class="currentUrl=='/serviceList.html'?'on':''"><a href="serviceList.html">服务中心</a></div>
+				<div class="tt" :class="currentUrl=='/project.html'?'on':''"><a href="project.html">项目业绩</a></div>
+				<div class="tt" :class="currentUrl=='/newsList.html'?'on':''"><a href="newsList.html">新闻动态</a></div>
+				<div class="tt" :class="currentUrl=='/sociaService.html'?'on':''"><a href="sociaService.html">消防社会化服务</a></div>
+				<div class="tt" :class="currentUrl=='/#'?'on':''"><a href="#">办公平台</a></div>
+				<div class="tt" :class="currentUrl=='/recruit.html'?'on':''"><a href="recruit.html">人才招聘</a></div>
+				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="black-bj" v-show="is_show"></div>
+	<div class="headH"></div>
+	
+</div>
+
+
+<script type="text/javascript">
+	var head_app = new Vue({
+	    el: '#head_app',
+	    data:function(){
+	        return {
+	        	banner_index:0,
+	        	is_toggle:false,
+				currentUrl:'',
+				is_show:false,
+				searchItem:{
+					thirdapp_id:window.base.thirdapp_id,
+					title:''
+				},
+				bannerTimer:null,
+				is_showNav:true
+				
+	        }
+	    },
+	    created:function () {
+			var self = this;
+			// self.getMainData();
+			if(window.screen.width<500){
+				self.is_showNav = false
+			};
+	        var currentUrl = window.base.GetUrlRelativePath();
+		
+			var reg = /\/([^\/]+)\.html/i;
+			if(reg.exec(currentUrl)&&reg.exec(currentUrl)[0]){
+				self.currentUrl = reg.exec(currentUrl)[0];
+			}else{
+				self.currentUrl = '/index.html';
+			};
+			
+
+    		window.base.bus.$on('to_headBanner',(res)=>{	
+				if(res.mainImg){
+					 self.bannerData = res.mainImg
+					 return
+				};
+				console.log('res222',res)
+				this.searchItem.title = res.title;
+				
+	        	this.to_headBanner()
+		    });
+			
+			self.bannerTimer = setInterval(function(){
+				self.changeBanner('+');
+			},3000)
+	    },
+		
+		
+		destroyed() {
+			const self = this;
+			clearInterval(this.timer);        
+			self.bannerTimer = null;
+		},
+	    methods: {
+			shownav(){
+				const self = this;
+				self.is_showNav = !self.is_showNav;
+				self.is_show = !self.is_show;
+			}
+			
+	    }
+	});
+</script>
+
+<style>
+.black-bj{z-index: 10;}
+.T-Logo{width:auto; height:70px; display: block;margin-right: 40px;}
+.head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #313131;}
+.head .logoCont{padding:10px 5%;}
+.orderNavTwo .w1200{align-items: flex-start;}
+.orderNavTwo .tt{ text-align: center; box-sizing: border-box;}
+.orderNavTwo .tt a{display: block;line-height: 60px;padding: 0 32px;}
+.orderNavTwo .tt.on{ color: #fff; position: relative;background: #fdba13; font-weight: bold;}
+.headH{height: 150px;width: 100%;}
+.mobile-Btn{width: 30px;height: 30px;background: #FDBA13;border-radius: 5px;padding: 5px;box-sizing: border-box;display: none;}
+.mobile-Btn em{width: 100%;height: 1px;background: #222;margin: 3px 0;}
+
+/*以下自适应样式*/
+@media screen and ( max-width: 1000px){
+	.orderNavTwo .w1200{padding: 0; font-size: 14px;width: 100%;}
+	.orderNavTwo .tt a{line-height: 40px;padding: 0 10px;}
+	
+	.head .logoCont{padding: 10px 2%;}
+	.T-Logo{height: 40px;}
+	.Rphone .img{height: 18px!important;}
+	.Rphone span{font-size: 13px;}
+	.headH{height: 100px;}
+}
+
+@media screen and ( max-width: 500px){
+	.Rphone{display: none;}
+	.mobile-Btn{display: block;}
+	.headH{height: 60px;}
+	
+	.orderNavTwo .w1200{display: block;}
+	.orderNavTwo .tt{width: 100%;border-bottom: 1px solid #eee;}
+}
+
+</style>
