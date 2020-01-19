@@ -34,7 +34,7 @@
 			</div>
 			<div class="R-Cont">
 				<div class="ind-performance">
-					<div class="inforCont flexCenter">
+					<div class="inforCont flexRowBetween">
 						<div class="item" v-for="(item,index) in mainData" :key="index">
 							<div class="flexEnd img"><img 
 							:src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" alt=""></div>
@@ -197,7 +197,7 @@
 	.orderNav .tt.on::after{content: ""; width: 17px; height: 17px;background: url(images/results-icon1.png) no-repeat 0 0/100% 100%; position: absolute; top: 50%;left:20px;transform: translateY(-50%);}
 	
 	.xiangMuList{padding-top: 70px; align-items: flex-start;}
-	.R-Cont{width: 80%;}
+	.R-Cont{width: 80%;min-height: 420px;}
 	.ind-performance .item .img img{width: 320px;height: 356px;}
 	
 	@media only screen and (max-width: 1000px){
@@ -223,7 +223,7 @@
 		
 		.xiangMuList{display: block;padding-top: 10px;}
 		.leftNav{width: 100%;border: none;}
-		.R-Cont{width: 100%;padding-top: 20px;}
+		.R-Cont{width: 100%;padding-top: 20px;min-height: 100px;}
 		
 		.titBox .tit{padding-top: 10px;}
 		.orderNav{display: flex;flex-wrap: wrap;align-items: flex-start;}

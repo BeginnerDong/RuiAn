@@ -19,21 +19,26 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
+		
 		<div class="w1100 recruitList center">
-			<ul class="flex">
-				<li v-for="(item,index) in mainData" :key="index">
-					<a :href="'recruitDetail.html?id='+item.id">
-						<div class="photo"><img src="images/recruitment-icon.png" ></div>
-						<h1 class="name">{{item.title}}</h1>
-						<h2 class="ftn money">{{item.small_title}}</h2>
-						<p class="jieshao avoidOverflow2">{{item.description}}</p>
-						<p class="lable fs14 color6">{{item.passage1}} | {{item.passage2}} | {{item.region}} </p>
-					</a>
-				</li>
-			</ul>
-			
-			
+			<div v-if="mainData.length>0">
+				<ul class="flex">
+					<li v-for="(item,index) in mainData" :key="index">
+						<a :href="'recruitDetail.html?id='+item.id">
+							<div class="photo"><img src="images/recruitment-icon.png" ></div>
+							<h1 class="name">{{item.title}}</h1>
+							<h2 class="ftn money">{{item.small_title}}</h2>
+							<p class="jieshao avoidOverflow2">{{item.description}}</p>
+							<p class="lable fs14 color6">{{item.passage1}} | {{item.passage2}} | {{item.region}} </p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div v-else>
+				<div class="nodata"></div>
+			</div>
 		</div>
+		
 		
 		<div class="pdt20"></div>
 		<div class="all-pages">
@@ -136,6 +141,7 @@
 		});
 	</script>
 	<style type="text/css">
+		.recruitList{min-height: 200px;}
 		.recruitList{padding-bottom: 40px;}
 		.recruitList ul{align-items: center;flex-wrap: wrap;}
 		.recruitList li{width: 350px;height: 320px;background: #fff;margin: 80px 25px 0 0;box-sizing: border-box;padding: 60px 20px 20px 20px;position: relative;box-shadow: 0 2px 5px rgba(0,0,0,0.15);}
@@ -155,6 +161,7 @@
 			.recruitList li .jieshao{margin-bottom: 20px;}
 		}
 		@media screen and ( max-width: 500px){
+			.recruitList{min-height: 100px;}
 			.recruitList li{width: 48%;height: 210px;margin-right: 4%;padding: 45px 10px 20px 10px;}
 			.recruitList li:nth-of-type(2n){margin-right: 0!important;}
 			.recruitList li:nth-of-type(3n){margin-right: 4%;}

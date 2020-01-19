@@ -96,7 +96,7 @@
 				:class="currentId==item.id?'on':''" @click="changeCurr(item.id)">{{item.title}}</span>
 				
 			</div>
-			<div class="about-teams">
+			<div class="about-teams" v-if="artData.length>0">
 				<ul class="flexRowBetween">
 					<li v-for="(item,index) in artData" :key="index">
 						<div class="pic"><img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" ></div>
@@ -108,7 +108,9 @@
 						</div>
 					</li>
 				</ul>
-				
+			</div>
+			<div v-else>
+				<div class="nodata"></div>
 			</div>
 			
 		</div>
@@ -312,6 +314,7 @@
 	
 	
 	/* 团队建设 */
+	.about-teams{min-height: 300px;}
 	.about-teams ul{flex-wrap: wrap; align-items: flex-start;}
 	.about-teams li{width: 48%;padding-right: 2%;margin-top: 50px;position: relative;}
 	.about-teams li:nth-of-type(2n){padding-right:0 ;padding-left: 2%;}

@@ -20,7 +20,7 @@
 		<include src="header.html"></include>
 		
 		<div class="w1100">
-			<div class="newsList pdt50">
+			<div class="newsList pdt50" v-if="mainData.length>0">
 				<ul>
 					<li v-for="(item,index) in mainData" :key="index">
 						<a class="flexRowBetween" :href="'detail.html?id='+item.id">
@@ -33,6 +33,9 @@
 						</a>
 					</li>
 				</ul>
+			</div>
+			<div v-else>
+				<div class="nodata"></div>
 			</div>
 		</div>
 		
@@ -137,6 +140,7 @@
 		});
 	</script>
 	<style type="text/css">
+		.newsList{min-height: 200px;}
 		.newsList li{ overflow: hidden; padding: 20px 0;}
 		.newsList li a{ width: 100%; height: 100%; box-sizing:border-box;align-items: flex-start;}
 		
@@ -148,7 +152,7 @@
 		.newsList li .data{ color: #999; font-size: 14px; position: absolute; bottom: 5px; left:0px;}
 		
 		@media screen and ( max-width: 1000px){
-			.newsList{padding-top: 10px;}
+			.newsList{padding-top: 10px;min-height: 150px;}
 			.newsList li{padding: 10px 0;}
 			.newsList li .photo{width: 170px;height: 125px;}
 			.newsList li .list{width:75%;height: 125px;}
@@ -157,6 +161,7 @@
 		}
 		
 		@media screen and ( max-width: 500px){
+			.newsList{min-height: 100px;}
 			.newsList li .photo{width:100px;height: 74px;}
 			.newsList li .list{width: 70%;height:74px;}
 			.newsList li h2{padding: 0px 0 3px 0;font-size: 13px;line-height: 20px;}

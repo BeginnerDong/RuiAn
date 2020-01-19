@@ -173,7 +173,7 @@
 			<p class="text">新闻动态</p>
 		</div>
 		<div class="ind-newBox w1100 pdb80">
-			<ul class="flexRowBetween">
+			<ul class="flex">
 				<li class="item" v-for="(item,index) in newsData" :key="index" v-if="index<3">
 					<a :href="'detail.html?id='+item.id">
 						<div class="pic oh"><img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></div>

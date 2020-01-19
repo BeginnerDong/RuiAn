@@ -21,7 +21,7 @@
 		
 		
 		<div class="w1100">
-			<div class="serviceList pdt50">
+			<div class="serviceList pdt50" v-if="mainData.length>0">
 				<ul>
 					<li v-for="(item,index) in mainData" :key="index">
 						<a class="flexRowBetween" :href="'detail.html?id='+item.id">
@@ -34,6 +34,9 @@
 						</a>
 					</li>
 				</ul>
+			</div>
+			<div v-else>
+				<div class="nodata"></div>
 			</div>
 		</div>
 		
@@ -137,6 +140,7 @@
 		});
 	</script>
 	<style type="text/css">
+		.serviceList{min-height: 260px;}
 		.serviceList li{ overflow: hidden; padding: 20px 0;}
 		.serviceList li a{ width: 100%; height: 100%; box-sizing:border-box;align-items: flex-start;}
 		
