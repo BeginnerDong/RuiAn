@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<script src="http://api.map.baidu.com/api?v=2.0&ak=mIdCboYQwSZudrFvg0a9vMN7hIpTCpbX"></script>
 	</head>
 
 <body>
@@ -24,23 +25,24 @@
 			<div class="threeData flexRowBetween center">
 				<div class="item flexColumn">
 					<img class="icon" src="images/contact-icon.png" >
-					<p class="fs16">西安市高新区锦业路38号粤汉国际D座23层</p>
+					<p class="fs16">{{mainData.description}}</p>
 				</div>
 				<div class="item flexColumn">
 					<img class="icon" src="images/contact-icon1.png" >
-					<p class="fs16">15623032563</p>
+					<p class="fs16">{{mainData.phone}}</p>
 				</div>
 				<div class="item flexColumn">
 					<img class="icon" src="images/contact-icon2.png" >
-					<p class="fs16">15623032563@163.com</p>
+					<p class="fs16">{{mainData.small_title}}</p>
 				</div>
 			</div>
 			
 			<div class="mapGps pr">
 				<div class="cont">
-					<img class="" src="images/contact-img.jpg" >
+					<div id="dituContent" style="min-height:500px;overflow:hidden;"></div>
 				</div>
-				<div class="FXewm"><img src="images/contact-img1.jpg" ></div>
+				
+				<div class="FXewm"><img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:''" ></div>
 			</div>
 		</div>
 		
@@ -60,24 +62,48 @@
 		        	banner_index:0,
 					is_show:false,
 					wx_show:2,
-					mainData: [],
+					mainData: {},
 					labelData: []
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getMainData();
+			},
+			
 		    methods: {
-				getMainData: function(id){
+				
+				getMainData(){
 				    var self = this;
+				    var postData = {};
+				    postData.searchItem = {
+						thirdapp_id:2,
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['联系我们']]
+							},
+							condition:'in',
+						}
+					};
 				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.mainData = res.info.data[0];
+							var map = new BMap.Map("dituContent");          // 创建地图实例
+							var point = new BMap.Point(parseFloat(self.mainData.passage1),parseFloat(self.mainData.passage2));  // 创建点坐标  
+							map.centerAndZoom(point, 15);  
+							var marker = new BMap.Marker(point);        // 创建标注    
+							map.addOverlay(marker);                  // 初始化地图，设置中心点坐标和地图级别 
+				        };    
 				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				    window.base.articleGet(postData, callback);
+				},
 				
 		    }
 		});

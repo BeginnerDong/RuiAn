@@ -1,7 +1,7 @@
 <div id="banner_app">
 	<div class="swiperBox">
 		<div class="banner" v-for="(item,index) in bannerData" v-show="index==banner_index" >
-			<img :src="item.banImgUrl" />
+			<img :src="item.url" />
 		</div>
 		
 		<!-- 导航点 -->
@@ -23,15 +23,21 @@
 				shownav:true,
 				is_show:false,
 				bannerData:[
-					{banImgUrl:"images/banner.png"},
-					{banImgUrl:"images/service-img.png"}
+					
 				],
 				searchItem:{
 					thirdapp_id:window.base.thirdapp_id,
 					title:''
 				},
 				bannerTimer:null,
-				
+				herfIndex:{
+					'/index.html':'首页轮播',
+					'/aboutUs.html':'关于瑞安轮播',
+					'/project.html':'项目业绩轮播',
+					'/sociaService.html':'消防社会化服务轮播',
+					'/contactUs.html':'联系我们轮播',
+					
+				}
 	        }
 	    },
 	    created:function () {
@@ -44,9 +50,9 @@
 			}else{
 				self.currentUrl = '/index.html';
 			};
-			
+			self.searchItem.title = self.herfIndex[self.currentUrl];
 
-    		window.base.bus.$on('to_headBanner',(res)=>{	
+    		/* window.base.bus.$on('to_headBanner',(res)=>{	
 				if(res.mainImg){
 					 self.bannerData = res.mainImg
 					 return
@@ -55,11 +61,10 @@
 				this.searchItem.title = res.title;
 				
 	        	this.to_headBanner()
-		    });
+		    }); */
 			
-			self.bannerTimer = setInterval(function(){
-				self.changeBanner('+');
-			},3000)
+			
+			self.getMainData()	
 	    },
 		
 		
@@ -69,6 +74,24 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			getMainData: function(id){
+			    var self = this;
+			    var postData = {};
+			    postData.searchItem = window.base.cloneForm(self.searchItem);
+				
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.bannerData =res.info.data[0].mainImg;
+						console.log('self.bannerData',self.bannerData)
+			        };    
+					self.bannerTimer = setInterval(function(){
+						
+						self.changeBanner('+');
+					},10000)
+			    };
+			    window.base.labelGet(postData, callback);
+			},
 			
 			toBannerOne:function(e){
 				const self = this;

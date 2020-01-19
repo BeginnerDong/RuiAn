@@ -21,9 +21,9 @@
 		
 		<div class="f5bj jobName">
 			<div class="w1100 pdlr4">
-				<div class="name fs20">消防员</div>
-				<p class="money">8千-1.5万</p>
-				<p class="lable">西安-未央区 3-5年 本科</p>
+				<div class="name fs20">{{mainData.title}}</div>
+				<p class="money">{{mainData.small_title}}</p>
+				<p class="lable">{{mainData.region}} {{mainData.passage1}} {{mainData.passage2}}</p>
 			</div>
 		</div>
 		<div>
@@ -34,11 +34,8 @@
 					<span>职位亮点</span>
 				</div>
 				<div class="jobLable flex">
-					<span>周末双休</span>
-					<span>周末双休</span>
-					<span>周末双休</span>
-					<span>周末双休</span>
-					<span>周末双休</span>
+					<span v-for="item in mainData.keywords">{{item}}</span>
+					
 				</div>
 				
 				<!-- 职位描述 -->
@@ -46,17 +43,8 @@
 					<span>职位描述</span>
 				</div>
 				<div class="xqInfor color6">
-					<p>任职资格：</p>
-					<div class="cont">
-						<p>1、工程造价等相关专业；</p>
-						<p>2、三年以上(含三年)造价咨询行业经验；</p>
-						<p>3、持国家造价员证书、具备工程造价咨询工作经验者优先。</p>
-					</div>
-					
-					<p class="pdt20">职位要求：</p>
-					<div class="cont">
-						<p>1、熟练使用工程造价及审核软件；熟悉掌握软件图形算量；</p>
-						<p>2、能够独立完成专业造价编审工作。</p>
+					<div class="content ql-editor " style="clear: both;">
+						<p class="p1 " v-html="mainData.content"></p>
 					</div>
 				</div>
 				
@@ -66,10 +54,12 @@
 				</div>
 				<div class="flex jobAddrs pdb40">
 					<img class="icon" src="images/recruitment-icon1.png" >
-					<p>蓝溪国际大厦</p>
+					<p>{{mainData.address}}</p>
 				</div>
 				<div class="jobMap flexEnd">
-					<div class="map"><img src="images/recruitment-img.jpg" ></div>
+					<div class="map">
+						<img :src="mainData.bannerImg&&mainData.bannerImg[0]?mainData.bannerImg[0].url:''" >
+					</div>
 				</div>
 			</div>
 		</div>
@@ -89,24 +79,35 @@
 		        	banner_index:0,
 					is_show:false,
 					wx_show:2,
-					mainData: [],
+					mainData: {},
 					labelData: []
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getMainData();
+			},
+			
+			
 		    methods: {
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						id: window.base.GetRequest().id,
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData = res.info.data[0]
+							self.mainData.keywords = self.mainData.keywords.split(',')
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
 		    }
 		});
 	</script>

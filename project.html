@@ -28,20 +28,22 @@
 					<h1 class="tit fs16 pdt20">项目业绩</h1>
 				</div>
 				<div class="orderNav fs14">
-					<span class="tt" :class="curr==index?'on':''" @click="changeCurr(index)" v-for="(item,index) in leftNavData" :key="index">{{item}}</span>
+					<span class="tt" :class="currId==item.id?'on':''" @click="changeCurr(item.id)" 
+					v-for="(item,index) in labelData" :key="index">{{item.title}}</span>
 				</div>
 			</div>
 			<div class="R-Cont">
 				<div class="ind-performance">
 					<div class="inforCont flexCenter">
-						<div class="item" v-for="(item,index) in performanceData" :key="index">
-							<div class="flexEnd img"><img src="images/home-img2.jpg" alt=""></div>
+						<div class="item" v-for="(item,index) in mainData" :key="index">
+							<div class="flexEnd img"><img 
+							:src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" alt=""></div>
 							<div class="FXCont">
-								<a href="detail.html">
+								<a :href="'detail.html?id='+item.id">
 									<div class="inff">
 										<div class="T-title pd20">
-											<h1 class="tit avoidOverflow">标题标题标题标题标题标题标题标题标题标题标题标题</h1>
-											<p class="tex color6 avoidOverflow2">内容呢热熔内容呢热熔是就等科三浪费哈付款交话费科技大厦福建省大黄蜂复合大师融捷股份分工表就是大概和发动机</p>
+											<h1 class="tit avoidOverflow">{{item.title}}</h1>
+											<p class="tex color6 avoidOverflow2">{{item.description}}</p>
 										</div>
 										<div class="downCt flexRowBetween pdlr4">
 											<p class="color6 fs12">查看详情</p>
@@ -57,9 +59,14 @@
 		</div>
 		
 		<div class="all-pages">
-			<span class="no-prev">上一页</span>
-			<span class="current">1</span>
-			<a href="#">2</a><a href="#">3</a>&nbsp;...&nbsp;<a href="#">100</a><a href="#" class="next">下一页</a>
+			<span class="no-prev" data-type="back" @click="changePage">上一页</span>
+			<block >
+				<span v-for="item in pageArray" v-if="item == paginate.currentPage" class="current">{{item}}</a>
+				<a v-for="item in pageArray" v-if="item != paginate.currentPage"  :data-page="item" @click="linkTo">{{item}}</a>
+			</block>
+			
+			
+			<span  class="next" data-type="next" @click="changePage">下一页</a>
 		</div>
 		
 		<div class="pdb80"></div>
@@ -80,29 +87,103 @@
 					mainData: [],
 					labelData: [],
 					serviceData:[{},{},{},{}],
-					curr:0,
+					currId:-1,
 					leftNavData:['住宅类','商场类','写字楼','场馆类','学校类','酒店类','厂房类','科研类','医院类'],
-					performanceData:[{},{},{},{},{},{}]
+					performanceData:[{},{},{},{},{},{}],
+					linkPage: [],
+					pageArray: [],
+					
+					allPages: 0,
+					paginate:{
+						count: 0,
+						currentPage: 1,
+						pagesize: 4,
+						is_page: true,
+					},
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getLabelData();
+			},
+			
 		    methods: {
-				changeCurr(index){
+				changeCurr(id){
 					const self = this;
-					self.curr = index
+					self.currId = id;
+					self.mainData = [];
+					self.getMainData()
 				},
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				getLabelData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						thirdapp_id: 2
+					};
+					postData.getBefore = {
+						caseData: {
+							tableName: 'Label',
+							searchItem: {
+								title: ['=', ['项目分类']],
+							},
+							middleKey: 'parentid',
+							key: 'id',
+							condition: 'in',
+						},
+					};
+					postData.order = {
+						create_time:'asc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.labelData.push.apply(self.labelData,res.info.data);
+							self.currId = self.labelData[0].id;
+							self.getMainData()
+						} else {
+							
+						};
+						
+						
+					};
+					window.base.labelGet(postData, callback);
+				},
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.paginate = window.base.cloneForm(self.paginate);
+					postData.searchItem = {
+						menu_id: self.currId
+					};
+					
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData,res.info.data);
+							self.paginate['count'] = res.info.total;
+							window.base.computePageArr(self);
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				
+				
+				linkTo(e) {
+					var self = this;
+					console.log(e);
+					self.linkPage = window.base.getDataSet(e).page;
+					window.base.linkTo(self);
+				},
+				
+				changePage(e) {
+					var self = this;
+					var dataSet = window.base.getDataSet(e);
+					window.base.changePage(dataSet, self);
+				},
 				
 		    }
 		});

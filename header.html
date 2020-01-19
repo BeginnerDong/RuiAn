@@ -2,10 +2,10 @@
 	
 	<div class="head">
 		<div class="logoCont w1200 flexRowBetween">
-			<div class="flex"><img class="T-Logo" src="images/home-icon.png"></div>
+			<div class="flex"><img class="T-Logo" :src="headerData.bannerImg&&headerData.bannerImg[0]?headerData.bannerImg[0].url:''"></div>
 			<div class="Rphone flex white">
 				<img style="width: 30px;height: 21px;display: block;" src="images/home-icon1.png" >
-				<span class="fs14 mgl10">400-568-823</span>
+				<span class="fs14 mgl10">{{headerData.phone}}</span>
 			</div>
 			<div class="mobile-Btn flexCenter" @click="shownav">
 				<span class="flexColumn">
@@ -24,7 +24,7 @@
 				<div class="tt" :class="currentUrl=='/project.html'?'on':''"><a href="project.html">项目业绩</a></div>
 				<div class="tt" :class="currentUrl=='/newsList.html'?'on':''"><a href="newsList.html">新闻动态</a></div>
 				<div class="tt" :class="currentUrl=='/sociaService.html'?'on':''"><a href="sociaService.html">消防社会化服务</a></div>
-				<div class="tt" :class="currentUrl=='/#'?'on':''"><a href="#">办公平台</a></div>
+				<div class="tt" :class="currentUrl=='/#'?'on':''"><a href="http://www.baidu.com">办公平台</a></div>
 				<div class="tt" :class="currentUrl=='/recruit.html'?'on':''"><a href="recruit.html">人才招聘</a></div>
 				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
 			</div>
@@ -51,8 +51,8 @@
 					title:''
 				},
 				bannerTimer:null,
-				is_showNav:true
-				
+				is_showNav:true,
+				headerData:{}
 	        }
 	    },
 	    created:function () {
@@ -70,7 +70,7 @@
 				self.currentUrl = '/index.html';
 			};
 			
-
+			self.getHeaderData();
     		window.base.bus.$on('to_headBanner',(res)=>{	
 				if(res.mainImg){
 					 self.bannerData = res.mainImg
@@ -82,9 +82,9 @@
 	        	this.to_headBanner()
 		    });
 			
-			self.bannerTimer = setInterval(function(){
+			/* self.bannerTimer = setInterval(function(){
 				self.changeBanner('+');
-			},3000)
+			},3000) */
 	    },
 		
 		
@@ -98,7 +98,34 @@
 				const self = this;
 				self.is_showNav = !self.is_showNav;
 				self.is_show = !self.is_show;
-			}
+			},
+			
+			getHeaderData(){
+			    var self = this;
+			    var postData = {};
+			    postData.searchItem = {
+					thirdapp_id:2,
+				};
+				postData.getBefore = {
+					child:{
+						tableName:'Label',
+						middleKey:'menu_id',
+						key:'id',
+						searchItem:{
+							status:['in',[1]],
+							title:['in',['联系我们']]
+						},
+						condition:'in',
+					}
+				};
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.headerData = res.info.data[0];
+						console.log('454',self.headerData)
+			        };    
+			    };
+			    window.base.articleGet(postData, callback);
+			},
 			
 	    }
 	});

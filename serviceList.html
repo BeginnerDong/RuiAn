@@ -23,13 +23,13 @@
 		<div class="w1100">
 			<div class="serviceList pdt50">
 				<ul>
-					<li v-for="(item,index) in serviceData" :key="index">
-						<a class="flexRowBetween" href="detail.html">
-							<img class="photo" src="images/service-img.png">
+					<li v-for="(item,index) in mainData" :key="index">
+						<a class="flexRowBetween" :href="'detail.html?id='+item.id">
+							<img class="photo" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 							<div class="list">
-								<h2 class="avoidOverflow">标题标题标题标题标题标题标题标题</h2>
-								<p class="tex2 avoidOverflow3">中央驻港机构严格按照宪法、基本法和中央授权在港履行职责，不容挑战，呼吁香港社会全体市民，认清极少数激进分子的暴力危害和本质，坚决维护一国两制，维护法治，中联办表示，坚决支持特区政府和警队依法严惩违法暴力行为，维护香港的社会稳定。中央驻港机构严格按照宪法、基本法和中央授权在港履行职责，不容挑战，呼吁香港社会全体市民，认清极少数激进分子的暴力危害和本质，坚决维护一国两制维护法治，中联办表示</p>
-								<p class="data">2019-7-23</p>
+								<h2 class="avoidOverflow">{{item.title}}</h2>
+								<p class="tex2 avoidOverflow3">{{item.description}}</p>
+								<p class="data">{{item.create_time}}</p>
 							</div>
 						</a>
 					</li>
@@ -38,9 +38,14 @@
 		</div>
 		
 		<div class="all-pages">
-			<span class="no-prev">上一页</span>
-			<span class="current">1</span>
-			<a href="#">2</a><a href="#">3</a>&nbsp;...&nbsp;<a href="#">100</a><a href="#" class="next">下一页</a>
+			<span class="no-prev" data-type="back" @click="changePage">上一页</span>
+			<block >
+				<span v-for="item in pageArray" v-if="item == paginate.currentPage" class="current">{{item}}</a>
+				<a v-for="item in pageArray" v-if="item != paginate.currentPage"  :data-page="item" @click="linkTo">{{item}}</a>
+			</block>
+			
+			
+			<span  class="next" data-type="next" @click="changePage">下一页</a>
 		</div>
 		
 		<div class="pdb80"></div>
@@ -60,24 +65,74 @@
 					wx_show:2,
 					mainData: [],
 					labelData: [],
-					serviceData:[{},{},{},{}]
+					serviceData:[{},{},{},{}],
+					mainData:[],
+					paginate:{
+						count: 0,
+						currentPage: 1,
+						pagesize: 4,
+						is_page: true,
+					},
+					linkPage: [],
+					pageArray: [],
+					
+					allPages: 0,
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getMainData();
+			},
+			
 		    methods: {
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
 				
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.paginate = window.base.cloneForm(self.paginate);
+					postData.searchItem = {
+						thirdapp_id:2
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['服务中心']]
+							},
+							condition:'in',
+						}
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData,res.info.data);
+							self.paginate['count'] = res.info.total;
+							window.base.computePageArr(self);
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				
+				
+				linkTo(e) {
+					var self = this;
+					console.log(e);
+					self.linkPage = window.base.getDataSet(e).page;
+					window.base.linkTo(self);
+				},
+				
+				changePage(e) {
+					var self = this;
+					var dataSet = window.base.getDataSet(e);
+					window.base.changePage(dataSet, self);
+				},
 		    }
 		});
 	</script>

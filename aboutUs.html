@@ -30,11 +30,11 @@
 				<p class="text">企业文化</p>
 			</div>
 			<div class="about-culture flexRowBetween pr">
-				<div class="Lpic"><img src="images/about-img.jpg" ></div>
+				<div class="Lpic"><img :src="cultureData.mainImg&&cultureData.mainImg[0]?cultureData.mainImg[0].url:''" ></div>
 				<div class="infor boxShaow color6">
-					<p class="avoidOverflow4">符合热缩管和公交卡放大了还干两份省挂号费就考虑价格话估计是个混混跟福克斯供货方接口干活给供货方健康的省挂号费看见个鹤骨肯定会过非结构化发保定市股莱珀妮发今日欧式的孤儿归人堆里天津港给卡里发达国家发德国人合同附件刚发的还有干会计复合大师规范化个挂号费就肯定会国防科大省挂号费供货方健康的供货方干活附近的开个会</p>
+					<p class="avoidOverflow4">{{cultureData.description}}</p>
 					<div class="flex Bbtn">
-						<a class="more" href="detail.html">查看详情</a>
+						<a class="more" :href="'detail.html?id='+cultureData.id">查看详情</a>
 					</div>
 				</div>
 			</div>
@@ -49,31 +49,12 @@
 				</div>
 				<div class="about-dvlptlis pdb80">
 					<ul>
-						<li>
+						<li v-for="item in developmentData">
 							<em class="yuan"></em>
-							<h1 class="time">2019年6月</h1>
-							<p class="tex">专业一对一即时金牌服务客户，快捷高效，走向最理性的自我和拥有最正确的思维认知，这就是教育的根本所在。</p>
+							<h1 class="time">{{item.title}}</h1>
+							<p class="tex">{{item.description}}</p>
 						</li>
-						<li>
-							<em class="yuan"></em>
-							<h1 class="time">2019年6月</h1>
-							<p class="tex">专业一对一即时金牌服务客户，快捷高效，走向最理性的自我和拥有最正确的思维认知，这就是教育的根本所在。</p>
-						</li>
-						<li>
-							<em class="yuan"></em>
-							<h1 class="time">2019年1月</h1>
-							<p class="tex">严谨把控服务流程，即时准确保障业务安全进行内容专业一对一即时金牌服务客户，快捷高效，走向最理性的自我和拥有最正确的思维认知，这就是教育的根本所在。</p>
-						</li>
-						<li>
-							<em class="yuan"></em>
-							<h1 class="time">2018年8月</h1>
-							<p class="tex">专属纯粹一站式服务专业一对一即时金牌服务客户，快捷高效，走向最理性的自我和拥有最正确的思维认知，这就是教育的根本所在。专属纯粹一站式服务专属纯粹一站式服务专属纯粹一站式服务，这就是教育的根本所在。</p>
-						</li>
-						<li>
-							<em class="yuan"></em>
-							<h1 class="time">2018年1月</h1>
-							<p class="tex">服务产品化定制规范，全程监控专业一对一即时金牌服务客户，快捷高效，走向最理性的自我和拥有最正确的思维认知，这就是教育的根本所在。中联办也发声明，表示严厉谴责，指这些行径已经完全超出了和平示威的范畴。</p>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -111,44 +92,23 @@
 				<p class="text">团队建设</p>
 			</div>
 			<div class="orderNav fs18 flexCenter borderB1">
-				<span class="tt" :class="curr==1?'on':''" @click="changeCurr('1')">风采</span>
-				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">规划</span>
-				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">展望</span>
+				<span class="tt" v-for="item in labelData" 
+				:class="currentId==item.id?'on':''" @click="changeCurr(item.id)">{{item.title}}</span>
+				
 			</div>
 			<div class="about-teams">
-				<ul class="flexRowBetween" v-show="curr==1">
-					<li v-for="(item,index) in teamsData" :key="index">
-						<div class="pic"><img class="pic" src="images/about-img3.jpg" ></div>
+				<ul class="flexRowBetween">
+					<li v-for="(item,index) in artData" :key="index">
+						<div class="pic"><img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" ></div>
 						<div class="infor boxShaow">
-							<a href="detail.html">
-								<h1 class="tit ftn fs16 avoidOverflow pdb15">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</h1>
-								<p class="text color6 avoidOverflow2">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+							<a :href="'detail.html?id='+item.id">
+								<h1 class="tit ftn fs16 avoidOverflow pdb15">{{item.title}}</h1>
+								<p class="text color6 avoidOverflow2">{{item.description}}</p>
 							</a>
 						</div>
 					</li>
 				</ul>
-				<ul class="flexRowBetween" v-show="curr==2">
-					<li v-for="(item,index) in teamsData" :key="index">
-						<div class="pic"><img class="pic" src="images/social-img.png" ></div>
-						<div class="infor boxShaow">
-							<a href="detail.html">
-								<h1 class="tit ftn fs16 avoidOverflow pdb15">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</h1>
-								<p class="text color6 avoidOverflow2">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-							</a>
-						</div>
-					</li>
-				</ul>
-				<ul class="flexRowBetween" v-show="curr==3">
-					<li v-for="(item,index) in teamsData" :key="index">
-						<div class="pic"><img class="pic" src="images/about-img.jpg" ></div>
-						<div class="infor boxShaow">
-							<a href="detail.html">
-								<h1 class="tit ftn fs16 avoidOverflow pdb15">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</h1>
-								<p class="text color6 avoidOverflow2">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-							</a>
-						</div>
-					</li>
-				</ul>
+				
 			</div>
 			
 		</div>
@@ -169,13 +129,21 @@
 					labelData: [],
 					certificateData:[{},{},{},{},{}],
 					curr:1,
-					teamsData:[{},{},{},{}] //团队建设
+					teamsData:[{},{},{},{}] ,//团队建设
+					cultureData:{},
+					developmentData:[],
+					labelData:[],
+					artData:[],
+					currentId:-1
 		        }
 		    },
+			
 			created:function () {
 				 var self = this;
 				 // window.base.bus.$emit('to_contentTwo',{paginate:self.paginate});
-				 self.getMainData();
+				 self.getCultureData();
+				 self.getDevelopmentData();
+				 self.getLabelData()
 				 window.base.bus.$on('to_swiper',(res)=>{	
 				 	this.to_swiper(res);
 				 });
@@ -183,26 +151,124 @@
 					self.slidesPerView = 3
 				 }
 			},
+			
 		    methods: {
-				changeCurr(curr){
+				
+				
+				getLabelData(){
+				    var self = this;
+				    var postData = {};
+				    postData.searchItem = {
+						thirdapp_id:2,
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'parentid',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['团队建设']]
+							},
+							condition:'in',
+						}
+					};
+					postData.order ={
+						listorder:'desc'
+					};
+				    var callback = function(res){
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.labelData.push.apply(self.labelData,res.info.data);
+							self.currentId = self.labelData[0].id;
+							self.getArtData()
+				        };    
+				    };
+				    window.base.labelGet(postData, callback);
+				},
+				
+				getArtData(){
+				    var self = this;
+				    var postData = {};
+				    postData.searchItem = {
+						thirdapp_id:2,
+						menu_id:self.currentId
+					};
+
+				    var callback = function(res){
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.artData.push.apply(self.artData,res.info.data);
+				        };    
+				    };
+				    window.base.articleGet(postData, callback);
+				},
+				
+				getCultureData(){
+				    var self = this;
+				    var postData = {};
+				    postData.searchItem = {
+						thirdapp_id:2,
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['企业文化']]
+							},
+							condition:'in',
+						}
+					};
+					
+				    var callback = function(res){
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.cultureData = res.info.data[0]
+				        };    
+				    };
+				    window.base.articleGet(postData, callback);
+				},
+				
+				getDevelopmentData(){
+				    var self = this;
+				    var postData = {};
+				    postData.searchItem = {
+						thirdapp_id:2,
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['发展历程']]
+							},
+							condition:'in',
+						}
+					};
+					postData.order = {
+						listorder:'desc'
+					}
+				    var callback = function(res){
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.developmentData.push.apply(self.developmentData,res.info.data)
+				        };    
+				    };
+				    window.base.articleGet(postData, callback);
+				},
+				
+				changeCurr(currentId){
 					const self = this;
-					if(curr!=self.curr){
-						self.curr = curr
+					
+					self.artData = [];
+					if(currentId!=self.currentId){
+						self.currentId = currentId;
+						self.getArtData()
 					}
 				},
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				
 				
 		    }
 		});
