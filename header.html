@@ -25,7 +25,7 @@
 				<div class="tt" :class="currentUrl=='/newsList.html'?'on':''"><a href="newsList.html">新闻动态</a></div>
 				<div class="tt" :class="currentUrl=='/sociaService.html'?'on':''"><a href="sociaService.html">消防社会化服务</a></div>
 				<div class="tt" :class="currentUrl=='/#'?'on':''"><a href="http://www.baidu.com">办公平台</a></div>
-				<div class="tt" :class="currentUrl=='/recruit.html'?'on':''"><a href="recruit.html">人才招聘</a></div>
+				<div class="tt" :class="currentUrl=='/recruit.html'?'on':''"><a :href="urlData.url">人才招聘</a></div>
 				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
 			</div>
 			
@@ -52,7 +52,8 @@
 				},
 				bannerTimer:null,
 				is_showNav:true,
-				headerData:{}
+				headerData:{},
+				urlData:{}
 	        }
 	    },
 	    created:function () {
@@ -71,6 +72,7 @@
 			};
 			
 			self.getHeaderData();
+			self.getUrlData();
     		window.base.bus.$on('to_headBanner',(res)=>{	
 				if(res.mainImg){
 					 self.bannerData = res.mainImg
@@ -125,6 +127,22 @@
 			        };    
 			    };
 			    window.base.articleGet(postData, callback);
+			},
+			
+			getUrlData(){
+			    var self = this;
+			    var postData = {};
+			    postData.searchItem = {
+					thirdapp_id:2,
+					title:'办公平台'
+				};
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.urlData = res.info.data[0];
+						console.log('454',self.urlData)
+			        };    
+			    };
+			    window.base.labelGet(postData, callback);
 			},
 			
 	    }
