@@ -17,7 +17,7 @@
 .ind-performance .item:nth-of-type(2n) .img{display: flex;justify-content: flex-start;}
 
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1100px){
 	.ind-performance .item .img img{width: 270px;height: 300px;}
 	.ind-performance .item .FXCont{height: 200px;}
 	.ind-performance .FXCont .T-title{padding: 15px 12% 10px 10px;}
