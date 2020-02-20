@@ -17,7 +17,7 @@
 		</div>
 		
 		<div class="whiteBj orderNavTwo fs16" v-show="is_showNav">
-			<div class="flexRowBetween w1200">
+			<div class="w1200 clearfix">
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于瑞安</a></div>
 				<div class="tt" :class="currentUrl=='/serviceList.html'?'on':''"><a href="serviceList.html">服务中心</a></div>
@@ -154,18 +154,18 @@
 .T-Logo{width:auto; height:70px; display: block;margin-right: 40px;}
 .head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #313131;}
 .head .logoCont{padding:10px 5%;}
-.orderNavTwo .w1200{align-items: flex-start;}
-.orderNavTwo .tt{ text-align: center; box-sizing: border-box;}
-.orderNavTwo .tt a{display: block;line-height: 60px;padding: 0 32px;}
+.orderNavTwo .tt{text-align: center; box-sizing: border-box;width: 10.6%;float: left;}
+.orderNavTwo .tt:nth-child(6){width: 13.8%;}
+.orderNavTwo .tt a{display: block;line-height: 60px;width: 100%;box-sizing: border-box;}
 .orderNavTwo .tt.on{ color: #fff; position: relative;background: #fdba13; font-weight: bold;}
 .headH{height: 150px;width: 100%;}
 .mobile-Btn{width: 30px;height: 30px;background: #FDBA13;border-radius: 5px;padding: 5px;box-sizing: border-box;display: none;}
 .mobile-Btn em{width: 100%;height: 1px;background: #222;margin: 3px 0;}
 
 /*以下自适应样式*/
-@media screen and ( max-width: 1000px){
+@media screen and ( max-width: 1100px){
 	.orderNavTwo .w1200{padding: 0; font-size: 14px;width: 100%;}
-	.orderNavTwo .tt a{line-height: 40px;padding: 0 10px;}
+	.orderNavTwo .tt a{line-height: 40px;}
 	
 	.head .logoCont{padding: 10px 2%;}
 	.T-Logo{height: 40px;}
