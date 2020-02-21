@@ -129,7 +129,7 @@
 					wx_show:2,
 					mainData: [],
 					labelData: [],
-					certificateData:[{},{},{},{},{}],
+					certificateData:[],
 					curr:1,
 					teamsData:[{},{},{},{}] ,//团队建设
 					cultureData:{},
@@ -145,7 +145,8 @@
 				 // window.base.bus.$emit('to_contentTwo',{paginate:self.paginate});
 				 self.getCultureData();
 				 self.getDevelopmentData();
-				 self.getLabelData()
+				 self.getLabelData();
+				 self.getCertificateData();
 				 window.base.bus.$on('to_swiper',(res)=>{	
 				 	this.to_swiper(res);
 				 });
@@ -156,6 +157,23 @@
 			
 		    methods: {
 				
+				getCertificateData(){
+				    var self = this;
+				    var postData = {};
+				    postData.searchItem = {
+						thirdapp_id:2,
+						title:'资质证书'
+					};
+					postData.order = {
+						create_time:'asc'
+					}
+				    var callback = function(res){
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.certificateData = res.info.data[0].mainImg
+				        };    
+				    };
+				    window.base.labelGet(postData, callback);
+				},
 				
 				getLabelData(){
 				    var self = this;
@@ -277,18 +295,22 @@
 	</script>
 	<script type="text/javascript">
 		// 资质证书轮播
-		$(function(){
-		   var swiper = new Swiper('.swiper-container', {
-		       pagination: '.swiper-pagination',
-		       nextButton: '.swiper-button-next',
-		       prevButton: '.swiper-button-prev',
-		       slidesPerView: 3,
-		       centeredSlides: true,
-		       paginationClickable: true,
-		       spaceBetween: 30,
-			   initialSlide: 1//第一张图显示位置
-		   });
-		}); 
+		window.onload = function () {
+		   $(function(){
+			  var swiper = new Swiper('.swiper-container', {
+				  pagination: '.swiper-pagination',
+				  nextButton: '.swiper-button-next',
+				  prevButton: '.swiper-button-prev',
+				  slidesPerView: 3,
+				  centeredSlides: true,
+				  paginationClickable: true,
+				  spaceBetween: 30,
+				  observer:true,//修改swiper自己或子元素时，自动初始化swiper
+				  observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			   initialSlide: 1  //第一张图显示位置
+			  });
+		   }); 
+		} 
 	</script>
 	
 	<style>

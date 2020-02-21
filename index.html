@@ -195,19 +195,24 @@
 </body>
 
 	<script type="text/javascript">
-		// 资质证书轮播
-		$(function(){
-		   var swiper = new Swiper('.swiper-container', {
-		       pagination: '.swiper-pagination',
-		       nextButton: '.swiper-button-next',
-		       prevButton: '.swiper-button-prev',
-		       slidesPerView: 3,
-		       centeredSlides: true,
-		       paginationClickable: true,
-		       spaceBetween: 30,
+		window.onload = function () {
+		   $(function(){
+			  var swiper = new Swiper('.swiper-container', {
+				  pagination: '.swiper-pagination',
+				  nextButton: '.swiper-button-next',
+				  prevButton: '.swiper-button-prev',
+				  slidesPerView: 3,
+				  centeredSlides: true,
+				  paginationClickable: true,
+				  spaceBetween: 30,
+				  observer:true,//修改swiper自己或子元素时，自动初始化swiper
+				  observeParents:true,//修改swiper的父元素时，自动初始化swiper
 			   initialSlide: 1  //第一张图显示位置
-		   });
-		}); 
+			  });
+		   }); 
+		}
+		// 资质证书轮播
+		
 	</script>
 	<script type="text/javascript">
 		var app = new Vue({
