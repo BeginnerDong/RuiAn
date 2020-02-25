@@ -36,8 +36,9 @@
 
 /* 新闻动态 */
 .ind-newBox ul{align-items: flex-start;}
-.ind-newBox .item{width: 350px; background: #FFF;box-shadow: 0 0 5px rgba(0,0,0,0.15);border-radius: 5px;overflow: hidden;margin-right: 2.2%;}
-.ind-newBox .item:nth-of-type(3n){margin-right: 0;}
+.ind-newBox .item{width: 350px; background: #FFF;box-shadow: 0 0 5px rgba(0,0,0,0.15);border-radius: 5px;overflow: hidden;margin-right: 2.2%;float: left;}
+
+.ind-newBox .item:nth-child(3n){margin-right: 0;}
 .ind-newBox .item .pic{width: 100%; height: 258px;overflow: hidden;}
 .ind-newBox .item .pic img{width: 100%;height: 100%;  transition: all 1s;}
 .ind-newBox .item:hover .pic img{transform: scale(1.1);}
@@ -86,32 +87,33 @@
 	.ind-box1 .tit{font-size: 14px;line-height: 20px;}
 	.ind-box1 .num{font-size: 13px;}
 	
-	.seeMoreBtn{width: 100px;line-height: 36px;height: 36px;font-size: 12px;margin-top: 35px;}
+	.seeMoreBtn{width: 100px;line-height: 36px;height: 36px;font-size: 14px;margin-top: 30px;}
 	.seeMoreBtn .arrow{width: 10px;height: 10px;}
 	
-	.ind-dynamic .item .imgBox{width: 65%;}
-	.ind-dynamic .item .texbox{width: 35%;}
+	.ind-dynamic .item .imgBox{width: 50%;}
+	.ind-dynamic .item .texbox{width: 48%;}
 	.ind-dynamic .item .imgBox img{height: 98px;}
-	.ind-dynamic .item .texbox .tit{margin-bottom: 3px;font-size: 14px;}
-	.ind-dynamic .item .texbox .text2{ -webkit-line-clamp: 2;font-size: 12px;}
+	.ind-dynamic .item .texbox .tit{margin-bottom: 5px;font-size: 14px;}
+	.ind-dynamic .item .texbox .text2{ -webkit-line-clamp: 2;font-size: 10px;line-height: 18px;}
 	.ind-dynamic .item .btn{width: 70px;font-size: 12px;line-height: 24px;height: 24px;margin-top:10px;}
 	
 	.ind-advantage .item .tit {font-size: 14px;margin:5px 0;}
-	.ind-advantage .item .tex2{font-size: 12px;line-height: 22px;padding: 0 10px;}
+	.ind-advantage .item .tex2{font-size: 12px;line-height: 20px;padding: 0 10px;}
 	
 	.ind-zhaoPin{height: 240px;padding: 60px 2% 30px 2%;}
 	.ind-zhaoPin .fxMiddle{width: 70px;height: 70px;}
-	.ind-zhaoPin .item{padding: 0 2% 0 45px;}
-	.ind-zhaoPin .item.left{padding: 0 45px 0 2%;}
+	.ind-zhaoPin .item{padding: 0 0 0 45px;}
+	.ind-zhaoPin .item.left{padding: 0 45px 0 0;}
 	.ind-zhaoPin .item .tit{font-size: 16px;margin-bottom:20px;}
 	.ind-zhaoPin .item .tex{font-size: 12px;line-height: 18px;margin-bottom: 15px;}
 	.ind-zhaoPin .item .tex:last-child{margin-bottom: 0;}
 	
-	.ind-newBox .item{width:31.5%;}
+	.ind-newBox .item{width:48.5%;margin-right: 0;}
+	.ind-newBox .item:nth-child(2n){float: right;}
 	.ind-newBox .item .pic{height: 84px;}
-	.ind-newBox .item .tit{font-size: 12px;}
-	.ind-newBox .item .infor{padding: 10px 5px;}
-	.ind-newBox .item .infor .tex2{font-size: 12px;padding-top: 3px;}
+	.ind-newBox .item .tit{font-size: 14px;}
+	.ind-newBox .item .infor{padding: 10px 10px;}
+	.ind-newBox .item .infor .tex2{font-size: 12px;line-height: 18px;padding-top: 3px;}
 	
 }
 

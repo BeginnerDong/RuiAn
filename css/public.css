@@ -250,8 +250,8 @@ textarea{width: 100%;padding: 10px; box-sizing: border-box;font-size: 12px;color
 	.pdb80{padding-bottom: 45px!important;}
 	
 	.pubtit{padding: 30px 0 30px 0;}
-	.pubtit .title{font-size: 18px;}
-	.pubtit .text{padding-top: 0px;font-size: 14px;}
+	.pubtit .title{font-size: 16px;}
+	.pubtit .text{padding-top: 0px;font-size: 16px;line-height: 24px;}
 	
 	.nodata{width: 150px;height: 120px;}
 	
