@@ -37,7 +37,8 @@
 					'/sociaService.html':'消防社会化服务轮播',
 					'/contactUs.html':'联系我们轮播',
 					'/serviceList.html':'服务中心轮播',
-					'/newsList.html':'新闻动态轮播'
+					'/newsList.html':'新闻动态轮播',
+					'/recruit.html':'人才招聘轮播'
 				}
 	        }
 	    },
@@ -133,7 +134,7 @@
 <style>
 	
 /*网站banner*/
-.swiperBox{  position: relative; width: 100%; height:800px; overflow: hidden;}
+.swiperBox{  position: relative; width: 100%; max-height:800px; overflow: hidden;}
 .swiperBox .banner{ width: 100%; height: 100%;}
 .swiperBox .banner img{ height: 100%;width: 100%; display: block;}
 
@@ -146,18 +147,18 @@
 .banBtnNav span.active{ background: #fdba13;width: 25px;}
 
 /* banner 各种屏幕自适应 */
-@media only screen and (max-width: 1600px){.swiperBox{height: 667px;}}
-@media only screen and (max-width: 1440px){.swiperBox{height: 600px;}}
-@media only screen and (max-width: 1366px){.swiperBox{height: 570px;}}
-@media only screen and (max-width: 1280px){.swiperBox{height: 533px;}}
-@media only screen and (max-width: 1024px){.swiperBox{height: 427px;}}
+@media only screen and (max-width: 1600px){.swiperBox{max-height: 667px;}}
+@media only screen and (max-width: 1440px){.swiperBox{max-height: 600px;}}
+@media only screen and (max-width: 1366px){.swiperBox{max-height: 570px;}}
+@media only screen and (max-width: 1280px){.swiperBox{max-height: 533px;}}
+@media only screen and (max-width: 1024px){.swiperBox{max-height: 427px;}}
 
 /* 平板 */
 @media only screen and (max-width: 800px){
-	.swiperBox{height:320px;}
+	.swiperBox{max-height:320px;}
 }
 @media only screen and (max-width: 500px){
-	.swiperBox{height: 156px;}
+	.swiperBox{max-height: 156px;}
 }
 
 </style>
