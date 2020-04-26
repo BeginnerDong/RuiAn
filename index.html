@@ -29,8 +29,8 @@
 		<div class="ind-box1 w1200 radius10 pubBj center flexRowBetween">
 			<div class="item" v-for="(item,index) in dataShow" :key="index">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" alt="">
-				<p class="tit">{{item.title}}</p>
-				<p class="num fs16">{{item.description}}</p>
+				<p class="tit">{{item.title?item.title:''}}</p>
+				<p class="num fs16">{{item.description?item.description:''}}</p>
 			</div>
 		</div>
 		
@@ -77,8 +77,8 @@
 			<div class="w1100 flexRowAround center pdb80">
 				<div class="item" v-for="(item,index) in advantageData" :key="index">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" alt="">
-					<h1 class="tit">{{item.title}}</h1>
-					<p class="tex2 fs14">{{item.description}}</p>
+					<h1 class="tit">{{item.title?item.title:''}}</h1>
+					<p class="tex2 fs14">{{item.description?item.description:''}}</p>
 				</div>
 			</div>
 		</div>
@@ -96,8 +96,8 @@
 						<a :href="'detail.html?id='+item.id">
 							<div class="inff">
 								<div class="T-title pd20">
-									<h1 class="tit avoidOverflow2">{{item.title}}</h1>
-									<p class="tex color6 avoidOverflow2">{{item.description}}</p>
+									<h1 class="tit avoidOverflow2">{{item.title?item.title:''}}</h1>
+									<p class="tex color6 avoidOverflow2">{{item.description?item.description:''}}</p>
 								</div>
 								<div class="downCt flexRowBetween pdlr4">
 									<p class="color6 fs12">查看详情</p>
@@ -178,8 +178,8 @@
 					<a :href="'detail.html?id='+item.id">
 						<div class="pic oh"><img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></div>
 						<div class="infor">
-							<p class="tit avoidOverflow">{{item.title}}</p>
-							<p class="tex2 avoidOverflow2 color6 fs14">{{item.description}}</p>
+							<p class="tit avoidOverflow">{{item.title?item.title:''}}</p>
+							<p class="tex2 avoidOverflow2 color6 fs14">{{item.description?item.description:''}}</p>
 						</div>
 					</a>
 				</li>
