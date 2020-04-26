@@ -61,8 +61,7 @@
 		<div class="all-pages">
 			<span class="no-prev" data-type="back" @click="changePage">上一页</span>
 			<block >
-				<span v-for="item in pageArray" v-if="item == paginate.currentPage" class="current">{{item}}</a>
-				<a v-for="item in pageArray" v-if="item != paginate.currentPage"  :data-page="item" @click="linkTo">{{item}}</a>
+				<span v-for="item in pageArray" :class="item == paginate.currentPage?'current':''" @click="linkTo(item)">{{item}}</span>
 			</block>
 			
 			
@@ -172,11 +171,12 @@
 				
 				
 				
-				linkTo(e) {
+				linkTo(item) {
 					var self = this;
-					console.log(e);
-					self.linkPage = window.base.getDataSet(e).page;
+					console.log(item);
+					self.linkPage = item;
 					window.base.linkTo(self);
+					console.log(self.pageArray)
 				},
 				
 				changePage(e) {

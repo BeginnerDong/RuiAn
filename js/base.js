@@ -1039,7 +1039,8 @@ window.base = {
 				alert('已经到底啦')
 			} else {
 				self.paginate.currentPage++;
-				
+				self.mainData = [];
+				self.getMainData();
 			}
 		};
 		if (dataSet.type == 'back') {
@@ -1047,7 +1048,8 @@ window.base = {
 				alert('已经没有啦')
 			} else {
 				self.paginate.currentPage--;
-				
+				self.mainData = [];
+				self.getMainData();
 			}
 		};
 
@@ -1059,7 +1061,8 @@ window.base = {
 			self.linkPage = '';
 		} else {
 			self.paginate.currentPage = self.linkPage;
-			return true;
+			self.mainData = [];
+			self.getMainData();
 			
 		}
 
