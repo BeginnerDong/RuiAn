@@ -1,5 +1,5 @@
 window.base = {
-	g_restUrl: 'http://106.12.155.217/raxf/public/index.php/api/v1/',
+	g_restUrl: 'http://raxf.ruianxiaofang.cn:8090/api/public/index.php/api/v1/',
 
 	thirdapp_id:2,
 	test:666,

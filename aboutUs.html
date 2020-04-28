@@ -71,7 +71,7 @@
 				<div class="swiper-container">
 				    <div class="swiper-wrapper">
 				        <div class="swiper-slide" v-for="(item,index) in certificateData" :key="index">
-							<img src="images/about-img2.jpg">
+							<img :src="item.url">
 						</div>
 				    </div>
 				</div>
