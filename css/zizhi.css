@@ -7,8 +7,8 @@
 .zizhiSwipe .swiper-slide:not(.swiper-slide-active){transform: scale(0.8);}
 .zizhiSwipe .swiper-slide img{ width: 100%; height: auto;}
 
-.zizhiSwipe .swiperBtn{opacity: 1; background-image: initial;}
-.zizhiSwipe .swiperBtn img{width: 100%;height: 100%; display: block;}
+.swiperBtn{opacity: 1; background-image: initial;}
+.swiperBtn img{width: 100%;height: 100%; display: block;}
 
 @media only screen and (max-width: 500px){
 	.zizhiSwipe .swiper-container{margin: 0 30px;}

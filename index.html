@@ -18,6 +18,28 @@
 		<link type="text/css" rel="stylesheet" href="css/performance.css">
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
 		<link type="text/css" rel="stylesheet" href="css/zizhi.css">
+		<style>
+			
+			/* 首页视频轮播 */
+			.ind-video .videoText{font-size: 16px;line-height: 30px;margin-bottom: 30px;}
+			.swiper-video{margin: 0 5%;/* height: 540px; */}
+			.swiper-video .swiper-slide{width:100%; text-align: center; font-size: 18px; display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;transition: 300ms;height: auto;position: relative; }
+			.swiper-video .swiper-slide:not(.swiper-slide-active){transform: scale(0.8);}
+			.swiper-video .swiper-slide img{ width: 100%; height: auto;}
+			.swiper-video .swiper-slide .video{width: 100%;height: 100%;}
+			
+			@media only screen and (max-width: 768px){
+				.swiper-video{margin: 0 8%;}
+				.ind-video .swiper-button-prev{left: 0;}
+				.ind-video .swiper-button-next{right: 0;}
+				.ind-video .videoText {font-size: 15px;line-height: 26px;}
+			}
+			
+			@media only screen and (max-width: 500px){
+				.swiper-video{margin: 0 10%;}
+				.ind-video .videoText {font-size: 13px;line-height: 22px;}
+			}
+		</style>
 	</head>
 
 <body>
@@ -33,6 +55,35 @@
 				<p class="num fs16">{{item.description?item.description:''}}</p>
 			</div>
 		</div>
+		
+		<div class="ind-video w1200">
+			<div class="pubtit flexColumn">
+				<h1 class="title">CORPORATE VIDEOL</h1>
+				<p class="text">企业视频</p>
+			</div>
+			<div class="videoText center">
+				<p>两个包路费的痕迹比较高菲律宾解放路班级管理节放假不把家居咕噜灵波</p>
+				<p>感觉梵蒂冈如果还让挺贵航股份打过来不过分开</p>
+			</div>
+			
+			<div class="cont pr">
+				<div class="swiper-container swiper-video">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img class="video" src="images/home-img6.jpg"/></div>
+						<div class="swiper-slide"><img src="images/home-img6.jpg"/></div>
+						<div class="swiper-slide"><img src="images/home-img6.jpg"/></div>
+					</div>
+				</div>
+				<!-- 左右按钮 -->
+				<div class="swiperBtn swiper-button-next">
+					<img src="images/home-icon15.png" />
+				</div>
+				<div class="swiperBtn swiper-button-prev">
+					<img src="images/home-icon14.png" />
+				</div>
+			</div>
+		</div>
+		
 		
 		<!-- 企业动态 -->
 		<div class="ind-dynamic pdb80">
@@ -117,7 +168,7 @@
 				<p class="text">资质证书</p>
 			</div>
 			<div class="w1100 zizhiSwipe pr ">
-				<div class="swiper-container">
+				<div class="swiper-container swiper-zizhi">
 				    <div class="swiper-wrapper">
 				        <div class="swiper-slide" v-for="(item,index) in certificateData" :key="index">
 				        	<img :src="item.url">
@@ -197,21 +248,36 @@
 	<script type="text/javascript">
 		window.onload = function () {
 		   $(function(){
-			  var swiper = new Swiper('.swiper-container', {
-				  pagination: '.swiper-pagination',
-				  nextButton: '.swiper-button-next',
-				  prevButton: '.swiper-button-prev',
-				  slidesPerView: 3,
-				  centeredSlides: true,
-				  paginationClickable: true,
-				  spaceBetween: 30,
-				  observer:true,//修改swiper自己或子元素时，自动初始化swiper
-				  observeParents:true,//修改swiper的父元素时，自动初始化swiper
-			   initialSlide: 1  //第一张图显示位置
-			  });
+			   
+			   // 视频轮播
+			   var swiper = new Swiper('.swiper-video', {
+			   	pagination: '.swiper-pagination',
+			   	nextButton: '.ind-video .swiper-button-next',
+			   	prevButton: '.ind-video .swiper-button-prev',
+			   	slidesPerView: 1,
+			   	centeredSlides: true,
+			   	paginationClickable: true,
+			   	spaceBetween: 30,
+			   	observer:true,//修改swiper自己或子元素时，自动初始化swiper
+			   	observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			   	initialSlide: 1  //第一张图显示位置
+			   });
+			   
+			   // 资质轮播
+			  var swiper = new Swiper('.swiper-zizhi', {
+					pagination: '.swiper-pagination',
+					nextButton: '.zizhiSwipe .swiper-button-next',
+					prevButton: '.zizhiSwipe .swiper-button-prev',
+					slidesPerView: 3,
+					centeredSlides: true,
+					paginationClickable: true,
+					spaceBetween: 30,
+					observer:true,//修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					initialSlide: 1  //第一张图显示位置
+				});
 		   }); 
 		}
-		// 资质证书轮播
 		
 	</script>
 	<script type="text/javascript">
